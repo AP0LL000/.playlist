@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sincèrement - Hamza</title>
+  <style>
+    :root {
+      --primary-color: #0abab5;
+      --text-color: #333;
+      --light-text: #777;
+      --bg-color: #02010c;
+      --card-bg: rgb(255, 255, 255);
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 30px;
+    }
+
+    .album-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+      background-color: var(--card-bg);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(14, 14, 14, 0.1);
+    }
+
+    .album-cover {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-right: 30px;
+      box-shadow: 0 4px 8px #3c3d3c;
+    }
+
+    .album-info h1 {
+      margin: 0 0 5px 0;
+      font-size: 28px;
+    }
+
+    .album-info h2 {
+      margin: 0 0 15px 0;
+      font-size: 20px;
+      color: var(--light-text);
+      font-weight: normal;
+    }
+
+    .album-meta {
+      color: var(--light-text);
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .tracklist {
+      background-color: var(--card-bg);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .tracklist h3 {
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-size: 18px;
+      color: #555;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+
+    .track {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid #f0f0f0;
+      transition: background-color 0.2s;
+    }
+
+    .track:hover {
+      background-color: rgba(29, 185, 84, 0.05);
+    }
+
+    .track a {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .track-number {
+      width: 30px;
+      color: var(--light-text);
+    }
+
+    .track-info {
+      flex-grow: 1;
+    }
+
+    .track-title {
+      font-weight: bold;
+      margin-bottom: 3px;
+      transition: color 0.2s;
+    }
+
+    .track:hover .track-title {
+      color: var(--primary-color);
+    }
+
+    .track-artist {
+      color: var(--light-text);
+      font-size: 14px;
+    }
+
+    .track-duration {
+      color: var(--light-text);
+      text-align: right;
+    }
+
+    .featured {
+      color: #888;
+      font-style: italic;
+    }
+
+    .back-btn {
+      
+      display: inline-block;
+      margin-bottom: 20px;
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  
+    .back-btn:hover {
+      text-decoration: underline;
+    }
+
+    .youtube-icon {
+      color: #FF0000;
+      margin-left: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-btn">← Retour</a>
+    
+    <div class="album-header">
+      <img src="IMG/sincerement.jpg" alt="Sincèrement" class="album-cover">
+      <div class="album-info">
+        <h1>Sincèrement</h1>
+        <h2>Hamza</h2>
+        <div class="album-meta">
+          <span>2023</span> • <span>17 titres</span>, <span>51 min 49 s</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tracklist">
+      <h3>Titres <small>(cliquez pour voir sur YouTube)</small></h3>
+      <div id="tracksContainer">
+        <!-- Les titres seront générés par JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Liste des vidéos YouTube correspondant à la playlist
+      const youtubeLinks = [
+        "https://www.youtube.com/watch?v=...",  // Introduction
+        "https://www.youtube.com/watch?v=...",  // Free YSL
+        "https://www.youtube.com/watch?v=...",  // Ma Réalité
+        "https://www.youtube.com/watch?v=...",  // Au Bout De La Nuit
+        "https://www.youtube.com/watch?v=...",  // Only U
+        "https://www.youtube.com/watch?v=...",  // Sadio (feat. Offset)
+        "https://www.youtube.com/watch?v=...",  // Tsunami
+        "https://www.youtube.com/watch?v=...",  // Atasanté Part.2
+        "https://www.youtube.com/watch?v=...",  // Codéine 19
+        "https://www.youtube.com/watch?v=...",  // Nasa
+        "https://www.youtube.com/watch?v=...",  // WWE
+        "https://www.youtube.com/watch?v=...",  // Cocoro (feat. CKay)
+        "https://www.youtube.com/watch?v=...",  // Murder
+        "https://www.youtube.com/watch?v=...",  // Nocif (feat. Damso)
+        "https://www.youtube.com/watch?v=...",  // Plus Jamais La Même
+        "https://www.youtube.com/watch?v=...",  // I Love U
+        "https://www.youtube.com/watch?v=..."   // Sincèrement
+      ];
+
+      const tracksData = [
+        { title: "Introduction", artist: "Hamza", duration: "1:34" },
+        { title: "Free YSL", artist: "Hamza", duration: "3:06" },
+        { title: "Ma Réalité", artist: "Hamza", duration: "2:50" },
+        { title: "Au Bout De La Nuit", artist: "Hamza", duration: "3:01" },
+        { title: "Only U", artist: "Hamza", duration: "3:14" },
+        { title: "Sadio (feat. Offset)", artist: "Hamza, Offset", duration: "2:42" },
+        { title: "Tsunami", artist: "Hamza", duration: "3:37" },
+        { title: "Atasanté Part.2", artist: "Hamza, Tiakola", duration: "3:14" },
+        { title: "Codéine 19", artist: "Hamza", duration: "2:23" },
+        { title: "Nasa", artist: "Hamza", duration: "3:04" },
+        { title: "WWE", artist: "Hamza", duration: "3:18" },
+        { title: "Cocoro (feat. CKay)", artist: "Hamza, CKay", duration: "3:49" },
+        { title: "Murder", artist: "Hamza", duration: "2:44" },
+        { title: "Nocif (feat. Damso)", artist: "Hamza, Damso", duration: "3:49" },
+        { title: "Plus Jamais La Même", artist: "Hamza", duration: "3:09" },
+        { title: "I Love U", artist: "Hamza", duration: "3:21" },
+        { title: "Sincèrement", artist: "Hamza", duration: "2:46" }
+      ];
+
+      const tracksContainer = document.getElementById('tracksContainer');
+      
+      tracksData.forEach((track, index) => {
+        const trackElement = document.createElement('div');
+        trackElement.className = 'track';
+        
+        const trackLink = document.createElement('a');
+        trackLink.href = youtubeLinks[index];
+        trackLink.target = '_blank';
+        
+        trackLink.innerHTML = `
+          <div class="track-number">${index + 1}</div>
+          <div class="track-info">
+            <div class="track-title">${track.title} <span class="youtube-icon">▶</span></div>
+            <div class="track-artist">${track.artist}</div>
+          </div>
+          <div class="track-duration">${track.duration}</div>
+        `;
+        
+        trackElement.appendChild(trackLink);
+        tracksContainer.appendChild(trackElement);
+      });
+    });
+  </script>
+</body>
+</html>

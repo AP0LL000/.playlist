@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu Horizontal Damso</title>
+  <link rel="stylesheet" href="style.css">
+  
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="navbar-logo">
+      <img src="IMG/logo_playlist.png" alt="Logo" class="logo">
+    </div>
+    <div class="navbar-spotify">
+      <a href="https://open.spotify.com/user/2zv8t1gj9er2rrsbuu8w67x1d?si=2cbfbc2f9fb44d00" target="_blank" class="spotify-btn">
+        <i class="fab fa-spotify"></i> <img src="IMG/spotify_logo.png" alt="">
+      </a>
+    </div>
+  </nav>
+  
+  <!-- Menu horizontal avec pochettes d'album -->
+  <div class="menu-container">
+    <div class="album-track" id="albumTrack">
+      <img src="IMG/lmf.jpg" alt="Album 1" class="album-cover" data-index="0">
+      <img src="IMG/sincerement.jpg" alt="Album 2" class="album-cover" data-index="1">
+      <img src="IMG/beyah.jpg" alt="Album 3" class="album-cover active" data-index="2">
+      <img src="IMG/trinity.jpg" alt="Album 4" class="album-cover" data-index="3">
+      <img src="IMG/afterhours.jpg" alt="Album 5" class="album-cover" data-index="4">
+    </div>
+
+    <!-- Indicateurs de position -->
+    <div class="indicators" id="indicators">
+      <div class="indicator" data-index="0"></div>
+      <div class="indicator" data-index="1"></div>
+      <div class="indicator active" data-index="2"></div>
+      <div class="indicator" data-index="3"></div>
+      <div class="indicator" data-index="4"></div>
+    </div>
+
+    <!-- Contrôles en bas de l'écran -->
+    <div class="controls">
+      <div class="prev-btn" onclick="slidePrev()">◀</div>
+      <div class="play-btn" onclick="openAlbum()">PLAY</div>
+      <div class="next-btn" onclick="slideNext()">▶</div>
+    </div>
+  </div>
+
+  <script>
+    const track = document.getElementById('albumTrack');
+    const covers = document.querySelectorAll('.album-cover');
+    const indicators = document.querySelectorAll('.indicator');
+    let index = 2;
+
+    function centerAlbum(clickedIndex) {
+      index = clickedIndex;
+      updateSlide();
+    }
+
+    function updateSlide() {
+      // Calculer le décalage pour centrer l'album sélectionné
+      const trackWidth = track.offsetWidth;
+      const coverWidth = 170; // Largeur d'une pochette + marges
+      const centerPosition = (trackWidth / 2) - (coverWidth / 2);
+      const offset = centerPosition - (index * coverWidth);
+      
+      track.style.transform = `translateX(${offset}px)`;
+
+      // Mettre à jour les classes active
+      covers.forEach((cover, i) => {
+        cover.classList.toggle('active', i === index);
+      });
+      
+      indicators.forEach((indicator, i) => {
+        indicator.classList.toggle('active', i === index);
+      });
+    }
+
+    function slideNext() {
+      index = (index + 1) % covers.length;
+      updateSlide();
+    }
+
+    function slidePrev() {
+      index = (index - 1 + covers.length) % covers.length;
+      updateSlide();
+    }
+
+    function openAlbum() {
+    const activeCover = document.querySelector('.album-cover.active');
+    const albumIndex = parseInt(activeCover.getAttribute('data-index'));
+    
+    const albumPages = [
+      "lmf.html",
+      "sincerement.html",
+      "beyah.html",
+      "trinity.html",
+      "afterhours.html"
+    ];
+    
+    if (albumIndex >= 0 && albumIndex < albumPages.length) {
+      window.location.href = albumPages[albumIndex];
+    }
+  }
+
+    // Écouteurs d'événements
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') slideNext();
+      if (e.key === 'ArrowLeft') slidePrev();
+      if (e.key === 'Enter') openAlbum();
+    });
+
+    // Permettre de cliquer directement sur une pochette
+    covers.forEach(cover => {
+      cover.addEventListener('click', function() {
+        const clickedIndex = parseInt(this.getAttribute('data-index'));
+        centerAlbum(clickedIndex);
+      });
+    });
+
+    // Permettre de cliquer sur les indicateurs
+    indicators.forEach(indicator => {
+      indicator.addEventListener('click', function() {
+        const clickedIndex = parseInt(this.getAttribute('data-index'));
+        centerAlbum(clickedIndex);
+      });
+    });
+
+    // Initialisation
+    updateSlide();
+  </script>
+</body>
+</html>

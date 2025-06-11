@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trinity - Laylow</title>
+  <style>
+    :root {
+      --primary-color: #0abab5;
+      --text-color: #333;
+      --light-text: #777;
+      --bg-color: #02010c;
+      --card-bg: rgb(255, 255, 255);
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 30px;
+    }
+
+    .album-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+      background-color: var(--card-bg);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(14, 14, 14, 0.1);
+    }
+
+    .album-cover {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-right: 30px;
+      box-shadow: 0 4px 8px #3c3d3c;
+    }
+
+    .album-info h1 {
+      margin: 0 0 5px 0;
+      font-size: 28px;
+    }
+
+    .album-info h2 {
+      margin: 0 0 15px 0;
+      font-size: 20px;
+      color: var(--light-text);
+      font-weight: normal;
+    }
+
+    .album-meta {
+      color: var(--light-text);
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .tracklist {
+      background-color: var(--card-bg);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .tracklist h3 {
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-size: 18px;
+      color: #555;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+
+    .track {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid #f0f0f0;
+      transition: background-color 0.2s;
+    }
+
+    .track:hover {
+      background-color: rgba(29, 185, 84, 0.05);
+    }
+
+    .track a {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .track-number {
+      width: 30px;
+      color: var(--light-text);
+    }
+
+    .track-info {
+      flex-grow: 1;
+    }
+
+    .track-title {
+      font-weight: bold;
+      margin-bottom: 3px;
+      transition: color 0.2s;
+    }
+
+    .track:hover .track-title {
+      color: var(--primary-color);
+    }
+
+    .track-artist {
+      color: var(--light-text);
+      font-size: 14px;
+    }
+
+    .track-duration {
+      color: var(--light-text);
+      text-align: right;
+    }
+
+    .featured {
+      color: #888;
+      font-style: italic;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .back-btn:hover {
+      text-decoration: underline;
+    }
+
+    .youtube-icon {
+      color: #FF0000;
+      margin-left: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-btn">← Retour</a>
+    
+    <div class="album-header">
+      <img src="IMG/trinity.jpg" alt="Trinity" class="album-cover">
+      <div class="album-info">
+        <h1>Trinity</h1>
+        <h2>Laylow</h2>
+        <div class="album-meta">
+          <span>2022</span> • <span>22 titres</span>, <span>50 min 50ss</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tracklist">
+      <h3>Titres <small>(cliquez pour voir sur YouTube)</small></h3>
+      <div id="tracksContainer">
+        <!-- Les titres seront générés par JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Liste des vidéos YouTube correspondant à la playlist
+      const youtubeLinks = [
+        "https://youtu.be/7-q_u7gLU1s?si=-BetCVdwrvE_X7Wb",  // Initialisation
+        "https://youtu.be/y6XWegR-HYE?si=tGCQZyggfjrHzdhm",  // MEGATRON
+        "https://youtu.be/hpTidiFWepc?si=vgdibHZeM4sIT_us",  // DEHORS DANS LA NIGHT
+        "https://youtu.be/p9wtE-lmdJg?si=sDY4Cj8iZQJdHhuS",  // HILLZ (feat. S.Pri Noir)
+        "https://youtu.be/ostXFhTWp_I?si=hk61o5D06z1IvNq1",  // PLUG (feat. Jok'air)
+        "https://youtu.be/41Bpp5tKz7o?si=_SUZa5RiMiM1VpQ3",  // Menu principal
+        "https://youtu.be/JjlOG3br4CU?si=q0ZAHIjL33TF-ypo",  // PIRANHA BABY
+        "https://youtu.be/Ta-3VizBGtQ?si=eKd-LStKnYNCSKUk",  // TRINITYVILLE
+        "https://youtu.be/33UxSkS3Nwg?si=cJl-lcXrw9vhFVZ5",  // Mieux vaut pas regarder, Pt. 1
+        "https://youtu.be/kuQmJz1zEgU?si=fzta3VlYJccLru4i",  // VAMONOS (feat. Alpha Wann)
+        "https://youtu.be/0OyBZE_k91Y?si=97Q0AD6XNXeKdPNU",  // AKANIZER
+        "https://youtu.be/dAHxgrP-Mt8?si=DDQrKYpYwX-YesB-",  // BURNING MAN (feat. Lomepal)
+        "https://youtu.be/j2zkf-jNljo?si=MfwEw5HCal-nQppv",  // Il était une fois sous l'eau
+        "https://youtu.be/ho6xV73xFlU?si=KPPyS-PWyePwPaP9",  // LONGUE VIE...
+        "https://youtu.be/ytACA82yirw?si=yMAadsAnxaUZUhxm",  // Mieux vaut pas regarder, Pt. 2
+        "https://youtu.be/RWYK3AkbxI4?si=VgT67HL6t3gYL-4w",  // ...DE BATARD (feat. Wit.)
+        "https://youtu.be/yHysXsqW7_s?si=9bV6_rMn7L6RuPoy",  // Tentative de reconnexion
+        "https://youtu.be/b3LdIMB7RnI?si=WE4vvs4H4o9c282W",  // POIZON
+        "https://youtu.be/q2otju2cJRw?si=U_6hWoJLRsMVJkBt",  // NAKRé
+        "https://youtu.be/RhWaFNz2ZC4?si=yUOofc9nxjpmmtiv",  // MILLION FLOWERZ
+        "https://youtu.be/9rUclI45YwU?si=YLWFXRdrUHLcNDR1",  // Manuel d'utilisation
+        "https://youtu.be/5Uo_gsAo0Rw?si=YXdWkfxESzxHkWSH"   // LOGICIEL TRISTE
+      ];
+
+      const tracksData = [
+        { title: "Initialisation", artist: "Laylow", duration: "2:15" },
+        { title: "MEGATRON", artist: "Laylow", duration: "2:30" },
+        { title: "DEHORS DANS LA NIGHT", artist: "Laylow", duration: "2:45" },
+        { title: "HILLZ (feat. S.Pri Noir)", artist: "Laylow, S.Pri Noir", duration: "3:10" },
+        { title: "PLUG (feat. Jok'air)", artist: "Laylow, Jok'air", duration: "2:55" },
+        { title: "Menu principal", artist: "Laylow", duration: "2:20" },
+        { title: "PIRANHA BABY", artist: "Laylow", duration: "2:40" },
+        { title: "TRINITYVILLE", artist: "Laylow", duration: "3:05" },
+        { title: "Mieux vaut pas regarder, Pt. 1", artist: "Laylow", duration: "2:50" },
+        { title: "VAMONOS (feat. Alpha Wann)", artist: "Laylow, Alpha Wann", duration: "3:15" },
+        { title: "AKANIZER", artist: "Laylow", duration: "2:35" },
+        { title: "BURNING MAN (feat. Lomepal)", artist: "Laylow, Lomepal", duration: "3:25" },
+        { title: "Il était une fois sous l'eau", artist: "Laylow", duration: "2:45" },
+        { title: "LONGUE VIE...", artist: "Laylow", duration: "2:30" },
+        { title: "Mieux vaut pas regarder, Pt. 2", artist: "Laylow", duration: "2:55" },
+        { title: "...DE BATARD (feat. Wit.)", artist: "Laylow, Wit.", duration: "3:10" },
+        { title: "Tentative de reconnexion", artist: "Laylow", duration: "2:40" },
+        { title: "POIZON", artist: "Laylow", duration: "2:50" },
+        { title: "NAKRé", artist: "Laylow", duration: "2:35" },
+        { title: "MILLION FLOWERZ", artist: "Laylow", duration: "3:00" },
+        { title: "Manuel d'utilisation", artist: "Laylow", duration: "2:45" },
+        { title: "LOGICIEL TRISTE", artist: "Laylow", duration: "2:30" }
+      ];
+
+      const tracksContainer = document.getElementById('tracksContainer');
+      
+      tracksData.forEach((track, index) => {
+        const trackElement = document.createElement('div');
+        trackElement.className = 'track';
+        
+        const trackLink = document.createElement('a');
+        trackLink.href = youtubeLinks[index];
+        trackLink.target = '_blank';
+        
+        trackLink.innerHTML = `
+          <div class="track-number">${index + 1}</div>
+          <div class="track-info">
+            <div class="track-title">${track.title} <span class="youtube-icon">▶</span></div>
+            <div class="track-artist">${track.artist}</div>
+          </div>
+          <div class="track-duration">${track.duration}</div>
+        `;
+        
+        trackElement.appendChild(trackLink);
+        tracksContainer.appendChild(trackElement);
+      });
+    });
+  </script>
+</body>
+</html>

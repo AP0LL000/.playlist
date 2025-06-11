@@ -1,0 +1,150 @@
+/* Styles principaux pour le menu horizontal Damso */
+body {
+  margin: 0;
+  background-color: #02010c;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
+/* Styles pour la barre de navigation */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: rgba(2, 1, 12, 0.8);
+  backdrop-filter: blur(5px);
+}
+
+.navbar-logo .logo {
+  height: 50px; /* Taille fixe pour le logo principal */
+  width: auto;
+  object-fit: contain;
+}
+
+.navbar-spotify {
+  display: flex;
+  align-items: center;
+}
+
+.spotify-btn {
+  background-color: transparent;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 50px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.spotify-btn:hover {
+  background-color: rgba(29, 185, 84, 0.2);
+}
+
+.spotify-btn img {
+  height: 30px; /* Taille fixe pour le logo Spotify */
+  width: auto;
+  object-fit: contain;
+}
+
+/* Ajustement pour le menu-container à cause de la navbar */
+.menu-container {
+  padding-top: 80px;
+  height: calc(100vh - 80px);
+}
+
+.menu-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.album-track {
+  display: flex;
+  align-items: center;
+  transition: transform 0.5s ease;
+}
+
+.album-cover {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  margin: 0 15px;
+  cursor: pointer;
+  transition: transform 0.3s, opacity 0.3s;
+  opacity: 0.7;
+}
+
+.album-cover:hover {
+  opacity: 0.8;
+}
+
+.album-cover.active {
+  transform: scale(1.2);
+  opacity: 1;
+  z-index: 10;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin-top: 40px;
+  background-color: #0abab5;
+  padding: 15px 30px;
+  border-radius: 50px;
+}
+
+.prev-btn, .next-btn {
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0 20px;
+}
+
+.play-btn {
+  background-color: #0abab5;
+  color: white;
+  padding: 10px 30px;
+  border-radius: 50px;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: transform 0.2s ease;
+}
+
+.play-btn:hover {
+  transform: scale(1.05);
+}
+.indicators {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 10px 0px;
+  margin-top: 50px;
+}
+
+.indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #777;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.indicator.active {
+  background-color: #0abab5;
+}
